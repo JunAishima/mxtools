@@ -65,18 +65,20 @@ class EigerSimulatedFilePlugin(Device, FileStoreBase):
 
 class EigerBaseV26(EigerDetector):
     # cam = Cpt(EigerDetectorCamV33, 'cam1:')
-    file = Cpt(
-        EigerSimulatedFilePlugin,
-        suffix="cam1:",
-        write_path_template="/nsls2/data/nyx/legacy/",
-        root="/nsls2/data/nyx/legacy",
-    )
+    datapath = Cpt(Signal, ""),  # such as /nsls2/data/nyx/legacy
     image = Cpt(ImagePlugin, "image1:")
 
     # hotfix: shadow non-existant PV
     size_link = None
 
     def stage(self, *args, **kwargs):
+        self.file = Cpt(
+            EigerSimulatedFilePlugin,
+            suffix="cam1:",
+            write_path_template=self.datapath.get(),
+            root=self.datapath.get(),
+        )
+
         # before parent
         ret = super().stage(*args, **kwargs)
         # after parent
