@@ -65,7 +65,7 @@ class EigerSimulatedFilePlugin(Device, FileStoreBase):
 
 class EigerBaseV26(EigerDetector):
     # cam = Cpt(EigerDetectorCamV33, 'cam1:')
-    datapath = Cpt(Signal, ""),  # such as /nsls2/data/nyx/legacy
+    data_path = Cpt(Signal, ""),  # such as /nsls2/data/nyx/legacy
     image = Cpt(ImagePlugin, "image1:")
 
     # hotfix: shadow non-existant PV
