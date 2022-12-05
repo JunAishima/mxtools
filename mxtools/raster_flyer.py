@@ -68,6 +68,7 @@ class MXRasterFlyer(MXFlyer):
         self.zebra.pc.pulse.step.put(pulse_step)
         self.zebra.pc.pulse.delay.put(exposure_period_per_image / 2 * 1000)
         self.zebra.pc.pulse.max.put(num_images)
+        self.vector.hold.put(0)  # necessary to ensure good raster after exposure time change
 
     def detector_arm(self, **kwargs):
         start = kwargs["angle_start"]
